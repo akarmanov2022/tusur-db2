@@ -4,11 +4,7 @@ USE master;
 GO
 CREATE LOGIN Karmanov_571 WITH PASSWORD = '<Karmanov_571>';
 GO
-CREATE SERVER ROLE terminator;
-GO
-ALTER SERVER ROLE terminator ADD MEMBER Karmanov_571;
-GO
-GRANT CONTROL SERVER TO terminator;
+ALTER SERVER ROLE sysadmin ADD MEMBER Karmanov_571;
 
 -- Часть 2
 USE AdventureWorks2019;
@@ -33,10 +29,20 @@ ALTER ROLE accountant ADD MEMBER User_Karmanov_571_2;
 
 GRANT SELECT ON HumanResources.Department TO accountant;
 GO
+DENY INSERT, DELETE, UPDATE ON HumanResources.Department TO accountant;
+GO
 GRANT SELECT ON HumanResources.Employee TO accountant;
+GO
+DENY INSERT, DELETE, UPDATE ON HumanResources.Employee TO accountant;
 GO
 GRANT SELECT ON HumanResources.EmployeeDepartmentHistory TO accountant;
 GO
+DENY INSERT, DELETE, UPDATE ON HumanResources.EmployeeDepartmentHistory TO accountant;
+GO
 GRANT SELECT ON HumanResources.EmployeePayHistory TO accountant;
 GO
+DENY INSERT, DELETE, UPDATE ON HumanResources.EmployeePayHistory TO accountant;
+GO
 GRANT SELECT ON HumanResources.Shift TO accountant;
+GO
+DENY INSERT, DELETE, UPDATE ON HumanResources.Shift TO accountant;
