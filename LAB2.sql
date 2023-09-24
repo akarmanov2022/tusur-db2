@@ -13,7 +13,7 @@ CREATE LOGIN Karmanov_without_select WITH PASSWORD = '<Karmanov_571>';
 GO
 CREATE USER user_without_select_1 FROM LOGIN Karmanov_without_select;
 GO
-DENY SELECT TO user_without_select_1;
+ALTER ROLE db_denydatareader ADD MEMBER  user_without_select_1;
 
 
 -- Задание 2 (Вариант 1)
@@ -46,3 +46,6 @@ GO
 GRANT SELECT ON HumanResources.Shift TO accountant;
 GO
 DENY INSERT, DELETE, UPDATE ON HumanResources.Shift TO accountant;
+
+
+SELECT * FROM Person.Address;
