@@ -13,13 +13,15 @@ GO
 CREATE SECURITY POLICY [Security].[EmployeeDepartmentHistory]
     ADD FILTER PREDICATE [Security].fn_employee_data_recording(DepartmentID) ON HumanResources.EmployeeDepartmentHistory
     WITH (STATE = ON)
-DROP SECURITY POLICY Security.EmployeeDepartmentHistory;
+-- DROP SECURITY POLICY Security.EmployeeDepartmentHistory;
+USE AdventureWorks2019;
 GO
 EXECUTE AS USER = 'User_Karmanov_571_2'
 GO
 EXEC sp_set_session_context @key=N'DepartmentId', @value=3
 GO
-SELECT E.LoginID, E.JobTitle, D.Name, D.DepartmentID
+SELECT D.Name, E.JobTitle, E.LoginID, D.DepartmentID
 FROM HumanResources.Employee E
         JOIN HumanResources.EmployeeDepartmentHistory EDH on E.BusinessEntityID = EDH.BusinessEntityID
-        JOIN HumanResources.Department D on D.DepartmentID = EDH.DepartmentID;
+        JOIN HumanResources.Department D on D.DepartmentID = EDH.DepartmentID
+-- group by D.Name, E.JobTitle, E.LoginID, D.DepartmentID;
